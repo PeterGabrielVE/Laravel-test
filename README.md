@@ -57,6 +57,21 @@ Usando este proyecto, crea una aplicación Laravel para gestionar un listado de 
 1. Escribe en este README, seguido de este texto, una consulta en SQL para encontrar todos los usuarios que tienen más de 5 tareas completadas organizandola cronologicamente de la tarea creada más actual a la más antigua.
 2. Explica brevemente cómo funciona la consulta.
 
+### SQL
+SELECT u.name, t.created_at
+FROM users u
+INNER JOIN tasks t ON u.id = t.id_user
+WHERE t.status = 1
+GROUP BY u.id
+HAVING COUNT(t.id) > 5
+ORDER BY t.created_at DESC;
+
+EXPLICACION
+1) LE DOY EL ALIAS A USUARIOS COMO u y Tasks con t
+2) Se seleccioona los campos requeridos con SELECT
+3) EL FRON y INNERJOIN  para unir solamente los registros que exista un ID de usuario entre ambajas tablas
+4) El having count ayuda a filtrar los usuarios que tienes mas de 5 tareas completadas
+5) Se orden con el OrderBy por fecha de creacion mostrando los mas reciente
 ---
 
 ### 4. Uso de Git
